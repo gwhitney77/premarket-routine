@@ -222,8 +222,10 @@ where generation failed). Proceed to Step 6.
      - `caution` → `#d4a010`
      - `neutral` → `#5a7da8`
    - Context sentence
-   All using inline CSS consistent with the dark theme (`background: #0d1220`,
-   `border: 1px solid #1e3a5f`, `color: #e8f0fe`).
+   All using inline CSS consistent with the dark theme: `background: #0d1220`,
+   `border: 1px solid #1e3a5f`. Use `color: #e8f0fe` for the indicator name
+   and value, `color: #c4d6f0` for the context sentence, and
+   `color: #8bafd4` for small labels and secondary text.
    Concatenate all 10 into the `{{INDICATORS}}` replacement string.
 
 5. Verify no `{{placeholder}}` tokens remain in the assembled HTML.

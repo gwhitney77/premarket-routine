@@ -67,7 +67,7 @@ inline**. No external stylesheets. Cards are concatenated and inserted into
       <span style="font-size: 20px; font-weight: 700; color: #e8f0fe; letter-spacing: 1px;">
         {{TICKER}}
       </span>
-      <span style="font-size: 13px; color: #5a7da8; margin-left: 8px;">
+      <span style="font-size: 13px; color: #8bafd4; margin-left: 8px;">
         {{NAME}}
       </span>
     </div>
@@ -83,7 +83,7 @@ inline**. No external stylesheets. Cards are concatenated and inserted into
   </div>
 
   <!-- Thesis -->
-  <p style="color: #a8c0e8; font-size: 13px; margin: 0 0 12px 0; line-height: 1.5;">
+  <p style="color: #c4d6f0; font-size: 13px; margin: 0 0 12px 0; line-height: 1.5;">
     {{THESIS}}
   </p>
 
@@ -93,15 +93,15 @@ inline**. No external stylesheets. Cards are concatenated and inserted into
   <!-- Entry / Stop / Target row -->
   <div style="display: flex; gap: 12px; margin-bottom: 12px;">
     <div style="flex: 1; background: #0a0e1a; border-radius: 6px; padding: 8px 10px; text-align: center;">
-      <div style="font-size: 10px; color: #5a7da8; letter-spacing: 0.8px; margin-bottom: 3px;">ENTRY</div>
+      <div style="font-size: 10px; color: #8bafd4; letter-spacing: 0.8px; margin-bottom: 3px;">ENTRY</div>
       <div style="font-size: 15px; font-weight: 600; color: #e8f0fe;">{{ENTRY}}</div>
     </div>
     <div style="flex: 1; background: #0a0e1a; border-radius: 6px; padding: 8px 10px; text-align: center;">
-      <div style="font-size: 10px; color: #5a7da8; letter-spacing: 0.8px; margin-bottom: 3px;">STOP</div>
+      <div style="font-size: 10px; color: #8bafd4; letter-spacing: 0.8px; margin-bottom: 3px;">STOP</div>
       <div style="font-size: 15px; font-weight: 600; color: #e84040;">{{STOP}}</div>
     </div>
     <div style="flex: 1; background: #0a0e1a; border-radius: 6px; padding: 8px 10px; text-align: center;">
-      <div style="font-size: 10px; color: #5a7da8; letter-spacing: 0.8px; margin-bottom: 3px;">TARGET</div>
+      <div style="font-size: 10px; color: #8bafd4; letter-spacing: 0.8px; margin-bottom: 3px;">TARGET</div>
       <div style="font-size: 15px; font-weight: 600; color: #16a359;">{{TARGET}}</div>
     </div>
   </div>
@@ -109,11 +109,11 @@ inline**. No external stylesheets. Cards are concatenated and inserted into
   <!-- R:R + Conviction row -->
   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
     <div>
-      <span style="font-size: 11px; color: #5a7da8;">R:R </span>
+      <span style="font-size: 11px; color: #8bafd4;">R:R </span>
       <span style="font-size: 14px; font-weight: 700; color: #c8922a;">{{RR}}</span>
     </div>
     <div style="display: flex; align-items: center; gap: 6px;">
-      <span style="font-size: 11px; color: #5a7da8;">Conviction</span>
+      <span style="font-size: 11px; color: #8bafd4;">Conviction</span>
       {{CONVICTION_DOTS}}
     </div>
   </div>
@@ -124,12 +124,12 @@ inline**. No external stylesheets. Cards are concatenated and inserted into
     padding-top: 8px;
     margin-top: 4px;
     font-size: 11px;
-    color: #5a7da8;
+    color: #8bafd4;
     line-height: 1.6;
   ">
-    <span style="color: #2a4a7f; text-transform: uppercase; letter-spacing: 0.8px; font-size: 10px;">Timing: </span>{{TIMING}}
+    <span style="color: #7090b8; text-transform: uppercase; letter-spacing: 0.8px; font-size: 10px;">Timing: </span>{{TIMING}}
     &nbsp;|&nbsp;
-    <span style="color: #2a4a7f; text-transform: uppercase; letter-spacing: 0.8px; font-size: 10px;">Catalyst: </span>{{CATALYST}}
+    <span style="color: #7090b8; text-transform: uppercase; letter-spacing: 0.8px; font-size: 10px;">Catalyst: </span>{{CATALYST}}
   </div>
 
 </div>
