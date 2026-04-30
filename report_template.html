@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pre-Market Intelligence Report — {{DATE}}</title>
+  <style>
+    /* Base resets for email client compatibility */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0a0e1a;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #e8f0fe;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    h3 {
+      color: #a8c0e8;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin: 20px 0 8px 0;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #1e3a5f;
+    }
+    ul, ol {
+      margin: 8px 0 12px 0;
+      padding-left: 20px;
+    }
+    li {
+      color: #a8c0e8;
+      margin-bottom: 5px;
+      line-height: 1.55;
+    }
+    p {
+      color: #a8c0e8;
+      margin: 0 0 10px 0;
+    }
+    strong {
+      color: #e8f0fe;
+    }
+    /* Semantic colour classes */
+    .bull  { color: #16a359; font-weight: 600; }
+    .bear  { color: #e84040; font-weight: 600; }
+    .caution { color: #d4a010; font-weight: 600; }
+    /* Key verdict box */
+    .highlight {
+      background: #1a2d4a;
+      border-left: 3px solid #16a359;
+      border-radius: 0 6px 6px 0;
+      padding: 12px 16px;
+      margin: 12px 0 18px 0;
+      color: #e8f0fe;
+      font-size: 15px;
+    }
+    .error { color: #e84040; font-style: italic; }
+  </style>
+</head>
+<body style="margin:0;padding:0;background:#0a0e1a;">
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HEADER BAR
+  ════════════════════════════════════════════════════════════════ -->
+  <table width="100%" cellpadding="0" cellspacing="0" border="0"
+         style="background:#0a0e1a;padding:0;">
+    <tr>
+      <td>
+        <div style="
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 28px 24px 20px 24px;
+          border-bottom: 1px solid #1e3a5f;
+        ">
+          <!-- System name + badge -->
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;">
+            <div>
+              <div style="font-size:11px;color:#2a4a7f;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px;">
+                Claude Code Routine
+              </div>
+              <div style="font-size:24px;font-weight:700;color:#e8f0fe;letter-spacing:-0.5px;">
+                Pre-Market Intelligence
+              </div>
+              <div style="font-size:13px;color:#5a7da8;margin-top:4px;">
+                {{DATE}} &nbsp;·&nbsp; {{TIME}}
+              </div>
+            </div>
+            <!-- Bias pill -->
+            <div style="
+              background: {{BIAS_COLOR}};
+              color: #fff;
+              font-size: 13px;
+              font-weight: 700;
+              letter-spacing: 1px;
+              padding: 8px 18px;
+              border-radius: 20px;
+              align-self: center;
+              white-space: nowrap;
+            ">
+              {{BIAS}}
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       STAT CHIP ROW
+  ════════════════════════════════════════════════════════════════ -->
+  <table width="100%" cellpadding="0" cellspacing="0" border="0"
+         style="background:#0a0e1a;">
+    <tr>
+      <td>
+        <div style="
+          max-width: 900px;
+          margin: 0 auto;
+          padding: 16px 24px;
+          border-bottom: 1px solid #1e3a5f;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+        ">
+
+          <!-- Chip: Indicators Live -->
+          <div style="
+            background:#0d1220;border:1px solid #1e3a5f;border-radius:6px;
+            padding:8px 14px;text-align:center;min-width:80px;
+          ">
+            <div style="font-size:18px;font-weight:700;color:#e8f0fe;">10</div>
+            <div style="font-size:10px;color:#5a7da8;letter-spacing:0.5px;margin-top:2px;">INDICATORS</div>
+          </div>
+
+          <!-- Chip: Bullish -->
+          <div style="
+            background:#0d1220;border:1px solid #16a359;border-radius:6px;
+            padding:8px 14px;text-align:center;min-width:80px;
+          ">
+            <div style="font-size:18px;font-weight:700;color:#16a359;">{{BULL_COUNT}}</div>
+            <div style="font-size:10px;color:#5a7da8;letter-spacing:0.5px;margin-top:2px;">BULLISH</div>
+          </div>
+
+          <!-- Chip: Bearish -->
+          <div style="
+            background:#0d1220;border:1px solid #e84040;border-radius:6px;
+            padding:8px 14px;text-align:center;min-width:80px;
+          ">
+            <div style="font-size:18px;font-weight:700;color:#e84040;">{{BEAR_COUNT}}</div>
+            <div style="font-size:10px;color:#5a7da8;letter-spacing:0.5px;margin-top:2px;">BEARISH</div>
+          </div>
+
+          <!-- Chip: Caution -->
+          <div style="
+            background:#0d1220;border:1px solid #d4a010;border-radius:6px;
+            padding:8px 14px;text-align:center;min-width:80px;
+          ">
+            <div style="font-size:18px;font-weight:700;color:#d4a010;">{{CAUTION_COUNT}}</div>
+            <div style="font-size:10px;color:#5a7da8;letter-spacing:0.5px;margin-top:2px;">CAUTION</div>
+          </div>
+
+          <!-- Divider -->
+          <div style="width:1px;background:#1e3a5f;margin:0 4px;"></div>
+
+          <!-- Chip: Longs -->
+          <div style="
+            background:#0d1220;border:1px solid #1e3a5f;border-radius:6px;
+            padding:8px 14px;text-align:center;min-width:80px;
+          ">
+            <div style="font-size:18px;font-weight:700;color:#16a359;">{{LONG_COUNT}}</div>
+            <div style="font-size:10px;color:#5a7da8;letter-spacing:0.5px;margin-top:2px;">LONGS</div>
+          </div>
+
+          <!-- Chip: Shorts -->
+          <div style="
+            background:#0d1220;border:1px solid #1e3a5f;border-radius:6px;
+            padding:8px 14px;text-align:center;min-width:80px;
+          ">
+            <div style="font-size:18px;font-weight:700;color:#e84040;">{{SHORT_COUNT}}</div>
+            <div style="font-size:10px;color:#5a7da8;letter-spacing:0.5px;margin-top:2px;">SHORTS</div>
+          </div>
+
+          <!-- Chip: Hedges -->
+          <div style="
+            background:#0d1220;border:1px solid #1e3a5f;border-radius:6px;
+            padding:8px 14px;text-align:center;min-width:80px;
+          ">
+            <div style="font-size:18px;font-weight:700;color:#d4a010;">{{HEDGE_COUNT}}</div>
+            <div style="font-size:10px;color:#5a7da8;letter-spacing:0.5px;margin-top:2px;">HEDGES</div>
+          </div>
+
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       MAIN CONTENT WRAPPER
+  ════════════════════════════════════════════════════════════════ -->
+  <div style="max-width:900px;margin:0 auto;padding:24px;">
+
+    <!-- ─────────────────────────────────────────────────────────
+         SECTION: INDICATOR GRID
+    ──────────────────────────────────────────────────────────── -->
+    <div style="margin-bottom:32px;">
+      <div style="
+        font-size:11px;color:#2a4a7f;letter-spacing:2px;
+        text-transform:uppercase;margin-bottom:14px;
+      ">
+        Market Indicators — Live Sweep
+      </div>
+
+      <!-- Indicator cards rendered 2-per-row on wider screens;
+           Claude inserts 10 cards via {{INDICATORS}} -->
+      <div style="
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+        gap: 12px;
+      ">
+        {{INDICATORS}}
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────────────────
+         SECTION: DAILY STRATEGY
+    ──────────────────────────────────────────────────────────── -->
+    <div style="
+      background:#0d1220;
+      border:1px solid #1e3a5f;
+      border-radius:10px;
+      padding:22px 24px;
+      margin-bottom:28px;
+    ">
+      <div style="
+        font-size:11px;color:#2a4a7f;letter-spacing:2px;
+        text-transform:uppercase;margin-bottom:14px;
+      ">
+        Daily Trading Strategy
+      </div>
+
+      {{STRATEGY}}
+    </div>
+
+    <!-- ─────────────────────────────────────────────────────────
+         SECTION: TRADE RECOMMENDATIONS
+    ──────────────────────────────────────────────────────────── -->
+    <div style="margin-bottom:32px;">
+      <div style="
+        font-size:11px;color:#2a4a7f;letter-spacing:2px;
+        text-transform:uppercase;margin-bottom:14px;
+      ">
+        Trade Recommendations
+      </div>
+
+      <!-- 2-column grid for trade cards -->
+      <div style="
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+        gap: 16px;
+      ">
+        {{TRADES}}
+      </div>
+    </div>
+
+    <!-- ─────────────────────────────────────────────────────────
+         FOOTER
+    ──────────────────────────────────────────────────────────── -->
+    <div style="
+      border-top: 1px solid #1e3a5f;
+      padding-top: 20px;
+      text-align: center;
+      color: #2a4a7f;
+      font-size: 11px;
+      line-height: 1.8;
+    ">
+      <div>Pre-Market Intelligence System &nbsp;|&nbsp; Generated by Claude Code Routine</div>
+      <div style="margin-top:4px;color:#1a3a6f;">
+        For educational purposes only — not financial advice.
+        Trading involves substantial risk of loss.
+        Always apply your own judgement and risk management.
+      </div>
+    </div>
+
+  </div><!-- /main content wrapper -->
+
+</body>
+</html>

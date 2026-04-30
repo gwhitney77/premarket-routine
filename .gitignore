@@ -1,0 +1,5 @@
+# Generated daily reports (large, ephemeral — stored as GitHub Actions artifacts instead)
+report_20*.html
+
+# Local Claude Code settings (MCP connectors, local config)
+.claude/

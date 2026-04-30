@@ -1,0 +1,3 @@
+# Pre-Market Intelligence System — Run Log
+# Format: DATE TIME | bias=BIAS | indicators=N/10 ok | trades=6 | delivery=status
+2026-04-30 08:38 ET | bias=MIXED / NEUTRAL — HIGH VOLATILITY EXPECTED | indicators=9/10 ok | trades=6 | delivery=ok (gmail draft created)

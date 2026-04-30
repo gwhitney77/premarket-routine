@@ -1,0 +1,52 @@
+name: Pre-Market Intelligence
+
+on:
+  schedule:
+    # 8:30 AM ET — UTC-4 (EDT, mid-March through early November)
+    # Runs at 7:30 AM ET during EST months (Nov–Mar); still pre-market
+    - cron: '30 12 * * 1-5'
+  workflow_dispatch:  # allow manual runs from the Actions tab
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # needed to commit run_log.txt back to the repo
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Pre-Market Intelligence Routine
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          npx --yes @anthropic-ai/claude-code@latest \
+            -p "Execute the pre-market intelligence pipeline as defined in CLAUDE.md. \
+            The Gmail MCP connector is not available in this cloud environment — \
+            if the email delivery step fails, saving the HTML report locally is \
+            sufficient and expected. All support files are present in the working \
+            directory." \
+            --dangerously-skip-permissions \
+            2>&1
+
+      - name: Upload report as artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: premarket-report-${{ github.run_id }}
+          path: report_20*.html
+          if-no-files-found: warn
+          retention-days: 90
+
+      - name: Commit run log
+        if: always()
+        run: |
+          git config user.name  "pre-market-bot"
+          git config user.email "action@github.com"
+          git add run_log.txt
+          git diff --staged --quiet || git commit -m "run: $(date -u +%Y-%m-%d) pre-market log"
+          git push
