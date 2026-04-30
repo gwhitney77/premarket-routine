@@ -23,6 +23,7 @@ determined, write `"N/A — [reason]"`.
 | 9 | `conviction` | enum     | Exactly one of: `HIGH` / `MEDIUM` / `LOW`                   |
 |10 | `timing`     | enum     | Exactly one of: `intraday` / `opening 30min` / `swing 2-3d` |
 |11 | `catalyst`   | string   | 1 sentence. What makes this timely today specifically.      |
+|12 | `entry_condition` | string | **Optional.** Required when a conditional entry trigger exists beyond price level (e.g. against-gap trades, VWAP triggers). One sentence: the exact condition that must be met before entering. Omit this field entirely when no condition applies. |
 
 ### R:R Calculation Rules
 
@@ -85,6 +86,9 @@ inline**. No external stylesheets. Cards are concatenated and inserted into
   <p style="color: #a8c0e8; font-size: 13px; margin: 0 0 12px 0; line-height: 1.5;">
     {{THESIS}}
   </p>
+
+  <!-- Entry condition: render this block ONLY when entry_condition is present; omit entirely when absent -->
+  {{ENTRY_CONDITION_BLOCK}}
 
   <!-- Entry / Stop / Target row -->
   <div style="display: flex; gap: 12px; margin-bottom: 12px;">
@@ -151,6 +155,7 @@ Replace each token when rendering a card:
 | `{{CONVICTION_DOTS}}`| Dot HTML (see below)                                          |
 | `{{TIMING}}`         | intraday / opening 30min / swing 2-3d                         |
 | `{{CATALYST}}`       | One-sentence timing rationale                                 |
+| `{{ENTRY_CONDITION_BLOCK}}` | Entry condition HTML block (see Entry Condition Rendering section below); omit entirely when no condition applies |
 
 ---
 
@@ -192,3 +197,30 @@ LOW:
 <span style="color:#1e3a5f;font-size:14px;">●</span>
 <span style="color:#1e3a5f;font-size:14px;">●</span>
 ```
+
+---
+
+## Entry Condition Rendering
+
+When a trade has a conditional entry trigger (`entry_condition` field 12),
+render `{{ENTRY_CONDITION_BLOCK}}` as the following HTML block, inserted
+between the thesis paragraph and the entry/stop/target row:
+
+```html
+<div style="
+  background: #1c1500;
+  border: 1px solid #d4a010;
+  border-left: 3px solid #d4a010;
+  border-radius: 0 4px 4px 0;
+  padding: 7px 12px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #d4a010;
+  line-height: 1.5;
+">
+  <span style="font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; font-size: 10px;">⚠ Entry Condition: </span>{{ENTRY_CONDITION}}
+</div>
+```
+
+When no `entry_condition` exists, omit `{{ENTRY_CONDITION_BLOCK}}` entirely
+— do not render an empty block.

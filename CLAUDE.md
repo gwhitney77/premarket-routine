@@ -135,28 +135,51 @@ HTML. Proceed to Step 5.
    - 1–2 SHORT or bearish plays on the weakest sectors identified in Step 2
    - 1 HEDGE or volatility play (e.g. VIX-related ETF, put spread setup,
      or inverse ETF)
-4. For each trade, populate all 11 mandatory fields defined in
+   - For earnings-driven LONG trades, only include a ticker if it beat
+     **both** EPS and revenue consensus estimates — a single-metric beat
+     does not qualify.
+4. **Post-earnings gap check:** For any ticker with a pre-market move of
+   >5% in either direction, assess whether the trade is *with* the gap
+   (momentum) or *against* the gap (counter-trend fade):
+   - **With-gap trade** (e.g. long a stock up 7% on an earnings beat):
+     standard process applies.
+   - **Against-gap trade** (e.g. short a stock already down 8% overnight):
+     require a conditional entry trigger. Populate `entry_condition` (field
+     12 in `trades_template.md`) with the specific trigger — for example:
+     *"Enter short only if stock fails to reclaim VWAP within first 30
+     minutes."* Set conviction one notch lower than the raw signal warrants.
+5. For each trade, populate all 11 mandatory fields defined in
    `trades_template.md`:
    `ticker`, `name`, `direction`, `thesis`, `entry`, `stop`, `target`,
    `rr`, `conviction`, `timing`, `catalyst`
-5. Before generating any trade card, run a dedicated web search for each
+   When a trade has a conditional entry trigger (per rule 4), also populate
+   the optional `entry_condition` field (field 12) from `trades_template.md`.
+6. Before generating any trade card, run a dedicated web search for each
    ticker's current price. Use the exact query format:
    `{TICKER} stock price premarket today {YYYY-MM-DD}`
    Extract the most recent premarket or last-close price from the results.
    If a search returns no usable price, note it and use the best available
    estimate from the indicator data in Step 2 — mark that card's entry price
    with `(est.)` to indicate it was not directly verified.
-6. Requirements:
+7. Requirements:
    - Use real, actively traded tickers (stocks or ETFs)
-   - Base entry, stop, and target on the prices retrieved in rule 5 above —
+   - Base entry, stop, and target on the prices retrieved in rule 6 above —
      never estimate from index-level data alone
+   - For post-earnings gap plays, set the stop-loss below the **gap fill
+     level** (the stock's opening print at market open), not just below the
+     entry price — intraday gap fills are common and a stop placed above the
+     open will be hit before any trend resumes.
+   - For intraday sector ETF longs on days with a high-impact macro release
+     at market open (CPI, PCE, NFP, GDP, FOMC), use a dynamic entry: enter
+     on the **first 5-minute bar close above the pre-market high** rather
+     than a static price limit, to avoid missing fast gap-and-go moves.
    - Format all prices as `$XXX.XX`
    - Calculate R:R as `(target − entry) / (entry − stop)` for longs,
      `(entry − target) / (stop − entry)` for shorts
    - Format R:R as `1:X.X`
-7. Render each trade as an HTML card following the exact structure and inline
+8. Render each trade as an HTML card following the exact structure and inline
    CSS rules in `trades_template.md`.
-8. Concatenate all 6 trade cards into `trades_html`.
+9. Concatenate all 6 trade cards into `trades_html`.
 
 Error fallback: if fewer than 6 trades can be generated, generate as many as
 possible, insert `<div class="trade-card-placeholder">[Trade unavailable]</div>`
@@ -325,7 +348,7 @@ Success criteria: one new line appended to `run_log.txt`. Pipeline complete.
 ## Output Quality Rules
 
 - Strategy HTML must contain all 6 section headers from `strategy_template.md`
-- Each trade card must contain all 11 fields from `trades_template.md`
+- Each trade card must contain all 11 mandatory fields from `trades_template.md`; when a conditional entry trigger exists, also include the `entry_condition` field (field 12)
 - Assembled HTML must be valid and self-contained (all CSS inline)
 - All prices formatted as `$XXX.XX`
 - All percentages formatted as `+X.X%` or `-X.X%`
