@@ -2,3 +2,4 @@
 # Format: DATE TIME | bias=BIAS | indicators=N/10 ok | trades=6 | delivery=status
 2026-04-30 08:38 ET | bias=MIXED / NEUTRAL — HIGH VOLATILITY EXPECTED | indicators=9/10 ok | trades=6 | delivery=ok (gmail draft created)
 2026-04-30 08:34 ET | bias=MIXED / NEUTRAL — HIGH VOLATILITY EXPECTED | indicators=10/10 ok | trades=6 | delivery=failed: Gmail MCP not available — report saved locally
+2026-05-01 08:35 ET | bias=MIXED / NEUTRAL — HIGH VOLATILITY EXPECTED | indicators=9/10 ok | trades=6 | delivery=failed: Gmail MCP connector unavailable in cloud environment
